@@ -56,7 +56,7 @@ const defaultColors = {
 }
 export default function ImageEditor(){
     const [imageURL, setImageURL] = useState();
-    
+    const [colors, setColors] = useState(defaultColors);
     useEffect(()=>{
         setImageURL(the_image(
             defaultColors
@@ -73,24 +73,24 @@ export default function ImageEditor(){
                     <div className="h-full">
                     <h2 className="font-medium">Sun or Moon</h2>
                     <input type='color' onChange={e => setImageURL(
-                        the_image({...defaultColors, ...{sunMoon: e.target.value}})
-                    )} defaultValue={defaultColors.sunMoon} />
+                        the_image({...colors, ...{sunMoon: e.target.value}})
+                    )} defaultValue={colors.sunMoon} />
                     <h2 className="font-medium">Fountain</h2>
                     <input type='color' onChange={e => setImageURL(
-                        the_image({...defaultColors, ...{fountain: e.target.value}})
-                    )} defaultValue={defaultColors.fountain} />
+                        the_image({...colors, ...{fountain: e.target.value}})
+                    )} defaultValue={colors.fountain} />
                     <h2 className="font-medium">Sky</h2>
                     <input type='color' onChange={e => setImageURL(
-                        the_image({...defaultColors, ...{sky: e.target.value}})
-                    )} defaultValue={defaultColors.sky} />
+                        the_image({...colors, ...{sky: e.target.value}})
+                    )} defaultValue={colors.sky} />
                     <h2 className="font-medium">Sea</h2>
                     <input type='color' onChange={e => setImageURL(
-                        the_image({...defaultColors, ...{sea: e.target.value}})
-                    )} defaultValue={defaultColors.sea} />
+                        the_image({...colors, ...{sea: e.target.value}})
+                    )} defaultValue={colors.sea} />
                     <h2 className="font-medium">Sand</h2>
                     <input type='color' onChange={e => setImageURL(
-                        the_image({...defaultColors, ...{sand: e.target.value}})
-                    )} defaultValue={defaultColors.sand} />
+                        the_image({...colors, ...{sand: e.target.value}})
+                    )} defaultValue={colors.sand} />
                     </div>
                 </section>
             </div>
