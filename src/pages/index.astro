@@ -21,12 +21,17 @@ import ImageEditor from '@/components/ImageEditor'
 			height: 100%;
 		}
 	</style>
-	<body class="antialiased bg-gray-100">
+	<body class="antialiased bg-gray-100 flex flex-col">
 		<header class="p-3">
 			<h2 class="font-black text-4xl">لوحة جدة</h2>
 		</header>
 		<main class="container my-2 p-3">
 			<ImageEditor client:load />
 		</main>
+		<footer class="mt-auto p-3 text-center">
+			<span class="leading-3">Very Creative Mashallah 
+				<a class="underline decoration-blue-700 text-blue-400" href="https://x.com/albobah">@albobah</a>
+			</span>
+		</footer>
 	</body>
 </html>
