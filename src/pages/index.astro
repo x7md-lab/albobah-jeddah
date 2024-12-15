@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css'
 import { Button } from "@/components/ui/button"
+import ImageEditor from '@/components/ImageEditor'
 ---
 
 <html lang="ar" dir="rtl">
@@ -24,15 +25,8 @@ import { Button } from "@/components/ui/button"
 		<header class="p-3">
 			<h2 class="font-black text-4xl">لوحة جدة</h2>
 		</header>
-		<main class="container my-4 p-3">
-			<div class="grid gap-5 px-4 md:grid-cols-2 grid-cols-1">
-				<div>
-					<img src="Jeddah by albobah.svg" />
-				</div>
-				<div>
-					2
-				</div>
-			</div>
+		<main class="container my-2 p-3">
+			<ImageEditor />
 		</main>
 	</body>
 </html>
