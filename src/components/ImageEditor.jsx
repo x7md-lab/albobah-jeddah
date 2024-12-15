@@ -6,13 +6,13 @@ export default function ImageEditor(){
 					<img className="max-h-[300px]" src="Jeddah by albobah.svg" />
 				</div>
             <div>
-                <section className="bg-white rounded-md flex justify-center items-center p-2 h-full">
+                <section className="bg-white rounded-md flex items-center p-2 h-full" dir="ltr">
                     <div className="h-full">
-                    Sun (Moon)
-                    Fountain
-                    Sky
-                    Sea
-                    Sand
+                    <h2 className="font-medium">Sun or Moon</h2>
+                    <h2 className="font-medium">Fountain</h2>
+                    <h2 className="font-medium">Sky</h2>
+                    <h2 className="font-medium">Sea</h2>
+                    <h2 className="font-medium">Sand</h2>
                     </div>
                 </section>
             </div>
