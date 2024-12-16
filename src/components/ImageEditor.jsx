@@ -1,5 +1,4 @@
-import { useEffect, useCallback, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import { useEffect, useCallback, useState, useRef } from 'react';
 import { renderToString } from 'react-dom/server';
 import { Button } from './ui/button';
 
@@ -56,6 +55,7 @@ const defaultColors = {
     sand: '#eebf91'
 }
 
+
 function getRandomHexColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -78,6 +78,7 @@ function generateRandomColors() {
 export default function ImageEditor(){
     const [imageURL, setImageURL] = useState();
     const [colors, setColors] = useState(defaultColors);
+    const imageRef = useRef(null);
 
     const handleClick = useCallback(() => {
         setColors(prevColors => {
@@ -94,10 +95,28 @@ export default function ImageEditor(){
         ));
     }, []);
 
+    async function downloadImage(){
+        const svg = await (await fetch(imageRef.current.src)).text();
+        console.log(svg)
+        const resvgJS = new resvg.Resvg(svg)
+        const pngData = resvgJS.render(svg) // Output PNG data, Uint8Array
+        const pngBuffer = pngData.asPng()
+        const file = new File([pngBuffer], "Jeddah by albobah.png", {
+            type: "image/png",
+        });
+        // const svgURL = URL.createObjectURL(new Blob([pngBuffer], { type: 'application/octet-stream' }))
+        const svgURL = URL.createObjectURL(file)
+        // console.info('Output PNG Size  :', `${pngData.width} x ${pngData.height}`)
+        const download = document.createElement('a');
+        download.setAttribute("download", "Jeddah by albobah.png");
+        download.href = svgURL;
+        download.click();
+    }
+
     return (
         <div className="grid gap-5 px-4 md:grid-cols-2 grid-cols-1">
-				<div className="flex justify-center items-center">
-					{imageURL && <img className="max-h-[265px]" src={imageURL}  />}
+				<div className="flex flex-col justify-center items-center">
+					{imageURL && <img className="max-h-[265px]" ref={imageRef} src={imageURL}  />}
 				</div>
             <div>
                 <section className="bg-white rounded-md flex flex-col justify-center p-2 h-full" dir="ltr">
@@ -118,7 +137,7 @@ export default function ImageEditor(){
                             </span>
                         </Button>
                     </div>
-                    <div className="h-full">
+                    <div>
                     <h2 className="font-medium">Sun or Moon</h2>
                     <input type='color' onChange={e => {
                         setImageURL(
@@ -155,7 +174,20 @@ export default function ImageEditor(){
                         setColors({...colors, ...{sand: e.target.value}})
                     }} defaultValue={colors.sand} />
                     </div>
+                    <div className='mt-4'>
+                        <div className='grid grid-cols-2 gap-5 bg-white'>
+                            <Button
+                            onClick={()=> downloadImage()}
+                            className='p-1 bg-transparent text-black hover:bg-gray-200 border'>
+                                Download
+                            </Button>
+                            <Button disabled className='p-1 bg-transparent text-black hover:bg-gray-200 border'>
+                                Share
+                            </Button>
+                        </div>
+                    </div>
                 </section>
+                
             </div>
         </div>
     )
